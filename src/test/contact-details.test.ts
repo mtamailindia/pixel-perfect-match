@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 describe("Public contact details", () => {
   it("uses the supplied email by default", () => {
-    expect(site.contactEmail).toBe("kryzalon3dlabs@gmail.com");
+    expect(site.contactEmail).toBe("contact@kryzalon.com");
   });
   it("uses the supplied Indian WhatsApp number", () => {
     expect(site.whatsappNumber).toBe("8867905924");
