@@ -44,7 +44,11 @@ Run your available TypeScript checker separately. Ordinary Vite development has 
 After your own deployment process, submit a clearly marked test through `/contact` using a real email. Confirm acceptance in the UI, inspect Resend logs and confirm arrival in `contact@kryzalon.com`; then reply to confirm Reply-To. Retry unchanged data to check duplicate protection, fill the honeypot to check rejection, and exceed the configured limit to check the rate-limit response. Verify failed sends preserve inputs. Confirm secrets are absent from public assets. Keep the site's existing DNS and Framer hosting untouched.
 
 ## Changed files
-`src/lib/enquiry.ts`, `src/routes/contact.tsx`, `src/routes/privacy.tsx`, `src/lib/enquiry.functions.ts` (new), `src/lib/enquiry-delivery.server.ts` (new), `src/test/enquiry-delivery.test.ts` (new), `package.json`, `bun.lock`, `package-lock.json`, `README.md`, `AGENTS.md`, `roadmap.md`, and this report.
+`src/lib/enquiry.ts`, `src/routes/contact.tsx`, `src/routes/privacy.tsx`, `src/lib/enquiry.functions.ts` (new), `src/lib/enquiry-delivery.server.ts` (new), `src/test/enquiry-delivery.test.ts` (new), `src/test/setup.ts` (supports server tests), `package.json`, `bun.lock`, `package-lock.json`, `README.md`, `AGENTS.md`, `roadmap.md`, and this report.
 
 ## Results
-Verification results are recorded below after running available tests. Manual deployment, Cloudflare bindings, real Resend acceptance and mailbox arrival remain unverified until the above setup is completed. Production builds and TypeScript checks are run by the preview harness, not manually in this workspace.
+All 38 tests pass across enquiry validation, delivery, contact details and navigation (four suites). Latest preview harness result: `build OK`, with no current TypeScript errors. No manual production build or TypeScript command was run, as this workspace delegates both to the harness; the external production bundle and its runtime behavior are unverified.
+
+Browser verification on `/contact`: a complete enquiry returns the safe unavailable response, keeps visitor inputs, and does not open an email application. Desktop and 390px mobile screenshots confirm the preserved layout and no horizontal overflow. Success is tested with a mocked Resend response only. The real accepted-email and mailbox flow cannot be verified without the declined secret and external binding setup. No owner email was sent.
+
+Dependency synchronization reported seven moderate advisories; no unrelated dependency fixes were applied. The test runner reports an existing `__dirname` configuration warning. Manual deployment, Cloudflare bindings, real Resend acceptance and mailbox arrival remain unverified until the above setup is completed.
