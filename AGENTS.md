@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Application architecture
+- Keep seven public content routes under TanStack Start, with the shared shell in the root route; this preserves typed navigation and independent page metadata.
+- Centralise public identity, canonical URL and optional contact email in src/lib/site.ts; this keeps launch configuration in one place.
+- Keep enquiry validation and draft formatting in browser-safe pure functions; no backend is needed and submissions must never be falsely acknowledged.
+- Prerender all public routes to static HTML for independent web-server hosting; no request-specific content may enter these routes.
+- Keep all design styling and semantic colour roles in src/styles.css; shared page pieces maintain a consistent brand.
