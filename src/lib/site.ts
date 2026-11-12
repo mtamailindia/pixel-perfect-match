@@ -2,7 +2,7 @@ export const site = {
   name: "KRYZALON",
   url: "https://www.kryzalon.com",
   location: "Bengaluru, India",
-  contactEmail: import.meta.env.VITE_CONTACT_EMAIL || "",
+  contactEmail: import.meta.env['VITE_CONTACT_EMAIL'] || "",
 };
 
 export const navigation = [
