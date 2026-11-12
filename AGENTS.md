@@ -32,6 +32,7 @@ use the editor.
 ## Application architecture
 - Keep seven public content routes under TanStack Start, with the shared shell in the root route; this preserves typed navigation and independent page metadata.
 - Centralise public identity, canonical URL and optional contact email in src/lib/site.ts; this keeps launch configuration in one place.
-- Keep enquiry validation and draft formatting in browser-safe pure functions; no backend is needed and submissions must never be falsely acknowledged.
-- Prerender all public routes to static HTML for independent web-server hosting; no request-specific content may enter these routes.
+- Keep enquiry schemas browser-safe and email delivery behind a TanStack server function with a server-only service; this prevents secret exposure and validates every request.
+- Fail closed without the request-time Cloudflare rate-limit binding and client IP; provider idempotency keys protect retry sends without an enquiry database.
+- Prerender public content only; real enquiry submission requires a running server function and cannot work on static-only hosting.
 - Keep all design styling and semantic colour roles in src/styles.css; shared page pieces maintain a consistent brand.

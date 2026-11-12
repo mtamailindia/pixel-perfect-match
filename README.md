@@ -1,6 +1,6 @@
 # KRYZALON website
 
-Seven-page informational site using React, TypeScript, TanStack Start, Vite and Tailwind CSS. No database, payment service or paid runtime is required. Every public route is prerendered to HTML for independent static hosting.
+Seven-page informational site using React, TypeScript, TanStack Start, Vite and Tailwind CSS. Public content is prerendered; the contact form now requires a running TanStack server function. Static-only Nginx hosting cannot send enquiries. No enquiry database has been added. See `EMAIL_IMPLEMENTATION.md` for current email setup and verification status.
 
 ## Local setup
 Install Node.js 22.12+ (or a current LTS) and npm. Clone your GitHub repository, then:
@@ -54,7 +54,7 @@ Point the domain’s A records (and AAAA only if IPv6 is configured) to your VPS
 ## Content and contact configuration
 - Public configuration and canonical origin: `src/lib/site.ts`.
 - Contact recipient: set `VITE_CONTACT_EMAIL` to a verified public address before building. It is public, not a secret. Do not put credentials in it.
-- With no recipient, the contact form validates and downloads an unsent text draft. With a recipient, it prepares a mailto link in the visitor’s email app. It never claims successful delivery; the visitor must send the email. No form data is stored by the website.
+- The form sends through Resend to contact@kryzalon.com; VITE_CONTACT_EMAIL controls the separately displayed public contact link, not the server recipient. Missing credentials or Cloudflare protection disable submission safely. Resend and the receiving mailbox may retain enquiries and delivery records.
 - Page content and unique SEO metadata: `src/routes/*.tsx`.
 - Shared header/footer: `src/components/site-shell.tsx`; shared content sections: `src/components/page-parts.tsx`.
 - Palette, spacing and typography: `src/styles.css`; fonts load in the root page head. Google Fonts is a third-party request; self-host fonts if required and revise privacy wording.
