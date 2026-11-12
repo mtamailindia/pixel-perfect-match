@@ -11,12 +11,12 @@ cp .env.example .env
 npm run dev
 ```
 
-Commands: `npm run dev` starts development; `npm run build` creates production output; `npm run preview` previews it locally; `npm test` runs tests. npm installs from package.json; commit the generated package-lock.json for subsequent reproducible `npm ci` installs. The existing bun.lock supports reproducible Bun installs too.
+Commands: `npm run dev` starts development; `npm run build` creates production output; `npm run preview` previews it locally; `npm test` runs tests. A package-lock.json is included for reproducible `npm ci` installs. The existing bun.lock supports reproducible Bun installs too.
 
 ## Independent static deployment
 `vite.config.ts` explicitly prerenders all seven routes. The production output is normally `dist/client`, containing `index.html`, `about/index.html`, `3d-printing/index.html`, etc., plus browser assets. Depending on the build adapter, public files may be copied to `.output/public`; inspect the build’s reported output folder. Deploy the directory containing the generated root index.html and all seven route folders together. Do not deploy server bundles. No builder account or running Node.js server is required to serve these static files. Check that all seven HTML files exist before deployment; do not substitute an SPA fallback for missing prerendered pages.
 
-Build and static output verification should be performed on your deployment machine before uploading. This repository’s hosted preview is separate from a VPS deployment.
+Build and static output verification should be performed on your deployment machine before uploading. Static prerendering is configured, but its final generated HTML files have not been inspected in this workspace. This repository’s hosted preview is separate from a VPS deployment.
 
 ## GitHub workflow
 Connect this project to GitHub through project settings, or use the editable source in your own repository. Keep environment files out of source control. On a local clone, create a branch, make changes, run tests and a production build, review and merge. Deploy from the reviewed branch. Do not commit node_modules, build output or secrets. For a CI workflow, run `npm ci` after committing package-lock.json, `npm test`, and `npm run build`, then upload only the static output directory.
